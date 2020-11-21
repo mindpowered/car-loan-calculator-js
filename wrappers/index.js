@@ -1,1 +1,1 @@
-import { CarLoanCalculator } from 'CarLoanCalculator'
+module.exports.CarLoanCalculator = require('./CarLoanCalculator.js');

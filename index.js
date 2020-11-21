@@ -1,1 +1,4 @@
-module.exports = require('./lib/carloancalculator.js');
+module.exports = Object.assign(
+    require('./lib/carloancalculator.js'),
+    require('./wrappers/index.js'),
+);
