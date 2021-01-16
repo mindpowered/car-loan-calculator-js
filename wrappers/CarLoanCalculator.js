@@ -6,7 +6,6 @@
 
 const maglev = require('@mindpowered/maglev');
 const carloancalculator = require('../lib/carloancalculator.js');
-const persistence = require('@mindpowered/persistence');
 
 /**
  * car loan
@@ -14,9 +13,8 @@ const persistence = require('@mindpowered/persistence');
  */
 class CarLoanCalculator {
 	constructor() {
-		let bus = maglev.maglev.MagLev.getInstance('carloancalculator');
+		let bus = maglev.maglev.MagLev.getInstance('default');
 		let lib = new carloancalculator.carloancalculator.CarLoanCalculator(bus);
-		new persistence.persistence.Persistence(bus);
 	}
 
 	/**
@@ -31,7 +29,7 @@ class CarLoanCalculator {
 	 * @return {Promise} payments and total interest Promise will resolve to type array.
 	*/
 	CalcPayments(newCarPrice, tradeInAllowance, tradeInLoanBalance, downPaymentAndRebates, loanDuration, salesTaxRate, interestRate) {
-		let jsbus = maglev.maglev.MagLevJs.getInstance('carloancalculator');
+		let jsbus = maglev.maglev.MagLevJs.getInstance('default');
 		let args = [newCarPrice, tradeInAllowance, tradeInLoanBalance, downPaymentAndRebates, loanDuration, salesTaxRate, interestRate];
 		let ret = jsbus.call('CarLoanCalculator.CalcPayments', args);
 		return ret;
@@ -49,7 +47,7 @@ class CarLoanCalculator {
 	 * @return {Promise} target price with tax and fees Promise will resolve to type number.
 	*/
 	CalcAffordability(monthlyPayment, tradeInAllowance, tradeInLoanBalance, downPaymentAndRebates, loanDuration, salesTaxRate, interestRate) {
-		let jsbus = maglev.maglev.MagLevJs.getInstance('carloancalculator');
+		let jsbus = maglev.maglev.MagLevJs.getInstance('default');
 		let args = [monthlyPayment, tradeInAllowance, tradeInLoanBalance, downPaymentAndRebates, loanDuration, salesTaxRate, interestRate];
 		let ret = jsbus.call('CarLoanCalculator.CalcAffordability', args);
 		return ret;
